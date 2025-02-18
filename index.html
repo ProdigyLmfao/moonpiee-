@@ -1,32 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proposed Her</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Hug Sender 🤗💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
-  <link rel="stylesheet" href="./style.css" />
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            animation: backgroundAnim 15s ease-in-out infinite;
+        }
+
+        @keyframes backgroundAnim {
+            0% { background: linear-gradient(to right, #ff758c, #ff7eb3); }
+            50% { background: linear-gradient(to right, #ff4e50, #ff4e50); }
+            100% { background: linear-gradient(to right, #ff758c, #ff7eb3); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            max-width: 500px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        button {
+            background: #ff4e50;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s ease;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: #e43e4e;
+            transform: scale(1.05);
+        }
+
+        .hug-message {
+            margin-top: 20px;
+            font-size: 1.5em;
+            animation: popIn 0.5s ease;
+            display: none;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 30%, 80% 100%, 50% 80%, 20% 100%, 0% 30%);
+            opacity: 0;
+            animation: floatUp 3s infinite ease-out;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-200px); opacity: 0; }
+        }
+
+        .hug-style {
+            padding: 10px 20px;
+            background: #ff4e50;
+            color: white;
+            border-radius: 25px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hug-style:hover {
+            background: #e43e4e;
+            transform: scale(1.05);
+        }
+
+        .glowing-heart {
+            width: 80px;
+            height: 80px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 30%, 80% 100%, 50% 80%, 20% 100%, 0% 30%);
+            margin: auto;
+            animation: glowingHeart 1.5s infinite alternate;
+        }
+
+        @keyframes glowingHeart {
+            0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); transform: scale(1.1); }
+            100% { box-shadow: 0 0 30px rgba(255, 0, 0, 1); transform: scale(1.2); }
+        }
+
+        /* Vibration animation */
+        @keyframes vibration {
+            0% { transform: translateX(0); }
+            10% { transform: translateX(-5px); }
+            20% { transform: translateX(5px); }
+            30% { transform: translateX(-5px); }
+            40% { transform: translateX(5px); }
+            50% { transform: translateX(0); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Heart fading up animation */
+        @keyframes heartFadeUp {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+    </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="tenor-gif-embed" data-postid="22885016" data-share-method="host" data-aspect-ratio="1.04918"
-      data-width="100%">
-      <a href="https://tenor.com/view/manja-gif-22885016">Manja Sticker</a>from
-      <a href="https://tenor.com/search/manja-stickers">Manja Stickers</a>
-    </div>
-    
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-    <h1>Do you love me? 🤗</h1>
-    <p>Pookie 🎀 is all yours</p>
-    <p>I love u sooo muchhh!</p>
+    <!-- Background music -->
+    <audio id="bg-music" autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mp3">
+    </audio>
 
-    <div class="btn">
-      <a href="yes.html">Yes</a>
-      <a href="no1.html">No</a>
+    <div class="container">
+        <h1>Send a Virtual Hug! <br>💖</h1>
+        <p>Send someone a warm, virtual hug with a cute message!<a/p>
+        
+        <input type="text" id="hug-message" placeholder="Type a sweet message..." style="padding: 10px; border-radius: 10px; border: none; font-size: 1em; width: 80%;">
+        <br><br>
+
+        <div class="hug-style" onclick="startAnimation()">Send Virtual Hug 💌</div>
+
+        <div class="hug-message" id="message-display"></div>
+        <div class="glowing-heart" id="hug-icon"></div>
     </div>
-  </div>
+
+    <script>
+        function startAnimation() {
+            let message = document.getElementById("hug-message").value;
+            let messageDisplay = document.getElementById("message-display");
+            let hugIcon = document.getElementById("hug-icon");
+
+            if (message.trim() === "") {
+                message = "A warm hug just for you! 🤗";
+            }
+
+            messageDisplay.innerHTML = message;
+            messageDisplay.style.display = "block";
+            hugIcon.style.display = "block";
+            hugIcon.style.animation = "vibration 1s ease-in-out";
+
+            // Create falling hearts
+            createFallingHearts();
+
+            // Play sound effect
+            playSoundEffect();
+
+            // After animation ends, trigger the fade-up heart effect
+            setTimeout(() => {
+                hugIcon.style.animation = "heartFadeUp 1.5s ease-in-out forwards";
+            }, 1000); // Wait for vibration to finish
+
+            // Redirect to the specified website after the animation
+            setTimeout(() => {
+                window.location.href = "https://guns.lol/itss._aaru";
+            }, 3000); // Delay for the total animation time
+        }
+
+        function createFallingHearts() {
+            for (let i = 0; i < 10; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                document.body.appendChild(heart);
+
+                let randomX = Math.random() * window.innerWidth;
+                let randomDelay = Math.random() * 2;
+                let randomSize = Math.random() * (30 - 10) + 10;
+
+                heart.style.left = `${randomX}px`;
+                heart.style.animationDelay = `${randomDelay}s`;
+                heart.style.width = `${randomSize}px`;
+                heart.style.height = `${randomSize}px`;
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+
+        function playSoundEffect() {
+            let audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+            audio.play();
+        }
+    </script>
 </body>
-
 </html>
